@@ -1,0 +1,22 @@
+{
+  "require": {
+    "mongodb/mongodb": "^1.9",
+    "doctrine/orm": "^2.6.2",
+    "symfony/yaml": "2.*",
+    "spatie/async": "^1.5",
+    "vlucas/phpdotenv": "^5.3",
+    "auth0/auth0-php": "^8.0",
+    "guzzlehttp/guzzle": "^7.3",
+    "guzzlehttp/psr7": "^2.0",
+    "kriswallsmith/buzz": "^1.2",
+    "nyholm/psr7": "^1.4",
+    "http-interop/http-factory-guzzle": "^1.2",
+    "steampixel/simple-php-router": "^0.7.0",
+    "braintree/braintree_php" : "6.4.1"
+  },
+  "autoload": {
+      "psr-4": { "": "test.php/" },
+      "classmap": ["app", "vendor"],
+      "files": ["app/src/util/logger.php", "app/src/util/functions.php"]
+  }
+}

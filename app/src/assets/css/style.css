@@ -1,0 +1,27 @@
+.click{
+  cursor: pointer;
+}
+body{
+  background-color: whitesmoke;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+b{
+  font-size: large;
+}
+.list-h{
+  max-height: 175px;
+  overflow: hidden;
+}
+.profile-icon{
+  height: 40px;
+}
+.product:hover{
+  transition: all .1s ease;
+  transform: scale(1.1);  
+}
+.qty-num{
+  width: 8%;
+}
