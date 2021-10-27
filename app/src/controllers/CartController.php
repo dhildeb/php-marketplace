@@ -24,7 +24,7 @@ class CartController{
     } else {
       echo "0 results";
     }
-
+console_log($cart);
     return $cart;
   }
 

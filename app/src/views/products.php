@@ -29,15 +29,18 @@ include 'productCreationModal.php';
 
   <div class="row justify-content-between mt-5">
 
-    <?php
+<?php
 
 foreach($products as $p){
   echo "
   <div class='col-3 d-flex flex-column p-3'>
-    <div class='border rounded shadow product click p-3' onclick='changeRoute(`http://localhost/test.php/index.php?action=$p[id]`)'>
+    <div class='border rounded shadow product click p-3' 
+    onclick='changeRoute(`http://localhost/test.php/index.php?action=$p[id]`)'
+    >
       <sup>Category: $p[category]</sup>
       <b class='text-center'>$p[title]</b>
-      <p>$p[description]</p>
+      <span id='$p[id]' class='dis-sm'>$p[description]</span>
+      <sub onclick='toggleClass(`$p[id]`, `dis-sm`, event)'>load more...</sub>
       <div class='d-flex justify-content-around'
         <p>Price: $$p[price]</p>
         <p>Quantity $p[quantity]</p>
@@ -55,4 +58,5 @@ foreach($products as $p){
 </div>
 
 <?php
+
 include 'footer.php';

@@ -32,7 +32,7 @@ echo "
       <form action='' method='post' class='d-flex flex-reverse'>
         <input type='hidden' name='productId' value='$product[id]'>
         <input type='hidden' name='profileId' value='$profile[id]'>
-        <input class='order-2 qty-num ml-2' type='number' name='quantity' value='1' min='1'>
+        <input class='order-2 qty-num ml-2' type='number' name='quantity' value='1' min='1' max='$product[quantity]'>
         <input class='btn btn-primary ml-3' type='submit' name='addToCart' value='Add To Cart'>
       </form>";
         }

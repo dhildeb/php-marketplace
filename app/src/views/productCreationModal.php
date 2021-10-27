@@ -50,7 +50,7 @@
           <div class="form-group">
             <label for="quantity">Quantity</label>
             <div class="input-group mb-3">
-              <input class="form-control" type="number" min="1" name="quantity" placeholder="1">
+              <input class="form-control" type="number" min="1" name="quantity" value="1">
             </div>
           </div>
           <div class="form-group">

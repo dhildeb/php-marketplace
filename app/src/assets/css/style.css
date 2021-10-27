@@ -23,5 +23,12 @@ b{
   transform: scale(1.1);  
 }
 .qty-num{
-  width: 8%;
+  width: 14%;
+}
+.dis-sm{
+  display: block;
+  width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

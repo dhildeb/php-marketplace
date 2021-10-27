@@ -26,3 +26,9 @@ function toggleModal(modal){
 function changeRoute(route){
 window.location = route
 }
+
+function toggleClass(id, styl, e){
+    e.preventDefault();
+    e.stopPropagation();
+  document.getElementById(id).classList.toggle(styl)
+}

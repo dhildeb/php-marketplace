@@ -1,4 +1,4 @@
-PHP Store, it includes paypal and mysql db.
+PHP Template, it includes authentication and mysql db.
 
 setup
 
@@ -8,5 +8,26 @@ USERNAME=
 PASSWORD=
 DB=
 
-follow paypal setup for credentials
-https://developer.paypal.com/docs/business/get-started/
+AUTH0_DOMAIN=
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_REDIRECT_URI=
+AUTH0_COOKIE_SECRET=
+
+ensure your db has the following tables and columns
+
+account
+-id
+-name
+-email
+-picture
+
+desks
+-id
+-number
+
+reservations
+-id
+-dateReserved
+-profileId
+-deskId

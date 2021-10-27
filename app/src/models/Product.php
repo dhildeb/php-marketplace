@@ -22,6 +22,6 @@ class Product{
     $this->title = $newTitle;
     $this->description = $newDescription;
     $this->quantity = intval($newQuantity);
-    $this->available = $newQuantity > 0 ? 1 : 0;
+    $this->available = $this->quantity > 0 ? 1 : 0;
   }
 }
