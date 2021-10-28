@@ -4,27 +4,28 @@ require PROJECT_ROOT_PATH.'/vendor/autoload.php';
 class CartController{
 
   private $db;
+  private $productController;
 
   function __construct()
   {
     $this->db = new Database();
+    $this->productController = new ProductController();
   }
-  // SELECT *, a.name, a.picture, r.id AS resId  FROM reservations AS r LEFT JOIN account AS a ON r.profileId=a.id WHERE deskId=? ORDER BY r.dateReserved
+
   public function getCartByProfileId($id){
     $cart = [];
-    $stmt = $this->db->conn->prepare("SELECT *, p.id AS pId FROM cart as c LEFT JOIN products AS p ON c.productId=p.id WHERE profileId=?");
+    $stmt = $this->db->conn->prepare("SELECT *, c.id AS itemId, p.id AS pId, p.quantity AS qty, c.quantity AS quantity FROM cart as c LEFT JOIN products AS p ON c.productId=p.id WHERE profileId=?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
     $res = $stmt->get_result();
     if ($res->num_rows > 0) {
       while($row = $res->fetch_assoc()) {
-        console_log($row);
         array_push($cart, $row);
       }
     } else {
       echo "0 results";
     }
-console_log($cart);
+
     return $cart;
   }
 
@@ -46,8 +47,8 @@ console_log($cart);
     $stmt->close();
     }
   
-  public function deleteEnetry($id){
-    $query = 'DELETE FROM cart WHERE id = ?';
+  public function removeFromCart($id){
+    $query = 'DELETE FROM cart WHERE id = ? LIMIT 1';
     $stmt = $this->db->conn->prepare($query);
     if(!$stmt){
       error_log('mysqli prepare() failed: ');
@@ -57,11 +58,22 @@ console_log($cart);
     $stmt->bind_param('s', $id);
     if(!$stmt){
       console_log('error deleting');
-    }else{
-      console_log('profile deleted');
     }
     $stmt->execute();
     $stmt->close();
+  }
+
+  public function buyItems($profileId){
+    // get all items in profile cart
+    $cart = $this->getCartByProfileId($profileId);
+    // remove qty from products
+    foreach($cart as $c){
+      // update product
+      $newQty = $c['qty']-$c['quantity'];
+      $this->productController->updateProductQty($c['id'], $newQty);
+      // remove products from cart
+      $this->removeFromCart($c['itemId']);
+    }
   }
   
 }

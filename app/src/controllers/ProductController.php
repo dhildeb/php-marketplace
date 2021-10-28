@@ -32,7 +32,6 @@ class ProductController{
     $res = $stmt->get_result();
     if ($res->num_rows > 0) {
       while($row = $res->fetch_assoc()) {
-        console_log($row);
         array_push($products, $row);
       }
     } else {
@@ -56,13 +55,39 @@ class ProductController{
 
   public function createProduct($category, $ownerId, $picture, $title, $description, $price, $quantity){
     $newProduct = new Product($category, $ownerId, $picture, $title, $description, $price, $quantity);
-    $stmt = $this->db->conn->prepare("INSERT INTO products (id, category, price, available, ownerId, quantity, picture, title, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $this->db->conn->prepare("INSERT INTO products (id, category, price, ownerId, quantity, picture, title, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
       die ("Statement Error: " . $this->db->conn->error);
     }
-    $stmt->bind_param("ssiisisss", $newProduct->id, $newProduct->category, $newProduct->price, $newProduct->available, $newProduct->ownerId, $newProduct->quantity, $newProduct->picture, $newProduct->title, $newProduct->description);
+    $stmt->bind_param("ssiisisss", $newProduct->id, $newProduct->category, $newProduct->price, $newProduct->ownerId, $newProduct->quantity, $newProduct->picture, $newProduct->title, $newProduct->description);
     $stmt->execute();
     $stmt->close();
+    }
+
+    public function updateProductQty($id, $qty){
+      $query = 'UPDATE products SET quantity=? WHERE id=?';
+      $stmt = $this->db->conn->prepare($query);
+      // check for error
+      if(!$stmt){
+        console_log('prepared error');
+        var_dump($this->stmt->error);
+        exit;
+      }
+      
+      $stmt->bind_param('is', $qty, $id);
+      // check for error
+      if(!$stmt){
+        console_log('error binding: '.$stmt->error);
+      }
+      
+      $status = $stmt->execute();
+      // check for error
+      if ($status === false) {
+        console_log('executing error');
+        trigger_error($stmt->error, E_USER_ERROR);
+      }
+      
+      $stmt->close();
     }
   
   public function deleteEnetry($id){

@@ -5,6 +5,10 @@ use Doctrine\DBAL\Driver\Mysqli\Exception\InvalidOption;
 include 'header.php';
 require PROJECT_ROOT_PATH.'/vendor/autoload.php';
 
+if(isset($_POST['buy'])){
+$cartController->buyItems($_POST['profileId']);
+}
+
 $cart = $cartController->getCartByProfileId($profile['id']);
 if(!$cart){
   echo "<h1>You dont have any items in your cart.</h1>
@@ -13,18 +17,18 @@ if(!$cart){
 }
 ?>
 <div class="container">
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col-grow-1">Description</th>
-      <th scope="col">QTY</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-<?php
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col-grow-1">Description</th>
+        <th scope="col">QTY</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
   $i = 0;
   $total = 0;
 foreach($cart as $c){
@@ -98,9 +102,16 @@ paypal.Buttons({
 // element.innerHTML = '';
 // element.innerHTML = '<h3>Thank you for your payment!</h3>';
 // Or go to another URL:  actions.redirect('thank_you.html');
-</script>";
+</script>
+
+<form action='' method='post' class='d-flex flex-reverse'>
+<input type='hidden' name='profileId' value='$profile[id]'>
+<input class='btn btn-primary ml-3' type='submit' name='buy' value='buy'>
+</form>
+";
 
 ?>
+
 </div>
 <?php
 include "footer.php";

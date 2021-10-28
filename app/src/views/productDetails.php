@@ -15,16 +15,17 @@ if(!$product){
 
 echo "
 <div class='container'>
-  <div class='row border rounded shadow mt-5'>
+  <div class='row bg-white border rounded shadow mt-5'>
     <div class='col-6 d-flex flex-column p-5'>
       <sup>Category: $product[category]</sup>
-      <b class='text-center'>$product[title]</b>
-      <p class='flex-fill'>$product[description]</p>
+      <b class='text-center mt-3'>$product[title]</b>
+      <p class='flex-fill mt-5'>$product[description]</p>
       <div class='d-flex justify-content-around'
         <p>Price: $$product[price]</p>
         ";
-        if(!$product['available']){
-          echo "<p>Out of Stock</p>";
+        if(!$product['quantity']){
+          echo "<p class='text-danger'>Out of Stock</p>
+          </div>";
         }else{
         echo "
         <p>Stock: $product[quantity]</p>

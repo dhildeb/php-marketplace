@@ -25,10 +25,14 @@ b{
 .qty-num{
   width: 14%;
 }
-.dis-sm{
+.text-hidden{
   display: block;
   width: auto;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.p-img{
+  height: 40vh;
+  object-fit: contain;
 }

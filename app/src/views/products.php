@@ -33,19 +33,23 @@ include 'productCreationModal.php';
 
 foreach($products as $p){
   echo "
-  <div class='col-3 d-flex flex-column p-3'>
-    <div class='border rounded shadow product click p-3' 
+  <div class='col-3 p-3'>
+    <div class='bg-white border rounded shadow product d-flex flex-column click p-3' 
     onclick='changeRoute(`http://localhost/test.php/index.php?action=$p[id]`)'
     >
       <sup>Category: $p[category]</sup>
-      <b class='text-center'>$p[title]</b>
-      <span id='$p[id]' class='dis-sm'>$p[description]</span>
-      <sub onclick='toggleClass(`$p[id]`, `dis-sm`, event)'>load more...</sub>
-      <div class='d-flex justify-content-around'
-        <p>Price: $$p[price]</p>
-        <p>Quantity $p[quantity]</p>
+      <b class='text-center py-2'>$p[title]</b>
+      <span id='$p[id]' class='text-hidden pb-1'>$p[description]</span>
+      <sub onclick='toggleClass(`$p[id]`, `text-hidden`, event)'>load more...</sub>
+      <img class='img-fluid p-img' src='$p[picture]' alt='$p[picture]' title='$p[title]'>
+      <div class='d-flex justify-content-around mt-3'>
+      <p>Price: $$p[price]</p>
+      ";
+      if(!$p['quantity']){
+        echo "<p class='text-danger'>Out of Stock</p>";
+      }
+      echo "
       </div>
-      <img class='img-fluid' src='$p[picture]' alt='$p[picture]' title='$p[title]'>
     </div>
   </div>
   ";

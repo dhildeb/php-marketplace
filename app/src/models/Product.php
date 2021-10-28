@@ -5,7 +5,6 @@ class Product{
   public $id;
   public $category;
   public $price;
-  public $available;
   public $ownerId;
   public $quantity;
   public $picture;
@@ -22,6 +21,5 @@ class Product{
     $this->title = $newTitle;
     $this->description = $newDescription;
     $this->quantity = intval($newQuantity);
-    $this->available = $this->quantity > 0 ? 1 : 0;
   }
 }
